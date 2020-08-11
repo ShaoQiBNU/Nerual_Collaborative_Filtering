@@ -59,7 +59,7 @@ Nerual Collaborative Filtering模型详解
 
 > 由于NeuMF目标函数的非凸性，基于梯度的优化方法只能找到局部最优解，初始化对深度学习模型的收敛性和性能起着重要的作用。由于NeuMF是一个集成GMF和MLP的模型，可以使用GMF和MLP的预训练模型初始化NeuMF。首先用随机初始化训练GMF和MLP，直到收敛。然后，使用它们的模型参数作为NeuMF参数的相应部分的初始化。唯一的调整是在输出层，将两个模型的权值连接在一起，如下：
 
-img
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/7.jpg)
 
 ## 实验
 
@@ -77,19 +77,17 @@ img
 
 > NeuMF在两个数据集上都取得了最好的性能，显著地超出了最先进的eALS和BPR方法(平均而言，相对于eALS和BPR的相对改进是分别是4.5%和4.9%)。对于Pinterest，即使预测因子为8，NeuMF的表现也明显优于eALS和BPR，后者的预测因子为64，这表明了通过融合线性MF和非线性MLP模型的NeuMF的高表达性。其次，其他两种NCF方法——GMF和MLP——也表现出了相当强的性能。其中，MLP的表现略逊于GMF。请注意，MLP可以通过添加更多的隐藏层来进一步改进(参见4.4节)，这里只展示了三层的性能。对于小的预测因子，GMF在两个数据集上都优于eALS;虽然GMF存在大因子过拟合的问题，但其最佳性能优于eALS。最后，GMF相对于BPR表现出一致的改进，承认了分类感知log损失对于推荐任务的有效性，因为GMF和BPR学习相同的MF模型，但目标函数不同。
 
-img
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/8.jpg)
 
 > 下图显示了Top-K推荐列表的性能，其中排名位置K的范围为1到10。
 
-
-
-img
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/9.jpg)
 
 > 为了证明预训练对NeuMF的效用，文章比较了两个版本的NeuMF的性能——有预训练和没有预训练。对于未经训练的NeuMF，使用Adam通过随机初始化来学习它。
 >
 > 经过预训练的NeuMF在大多数情况下都能获得更好的性能，只有预测因子为8的MovieLens，预训练方法的表现稍差。与预训练相比，NeuMF的相对改善为2.2%和MovieLens和Pinterest分别为1.1%。这个结果证明了在初始化NeuMF的训练前方法的有效性。
 
-img
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/10.jpg)
 
 #### 问题2
 
@@ -99,19 +97,19 @@ img
 >
 > 其次，在三种NCF方法中，NeuMF的训练损耗最低，其次是MLP, GMF次之。推荐性能也表现出与了相同的趋势NeuMF > MLP > GMF。
 
-img
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/11.jpg)
 
 > 为了说明负采样对NCF方法的影响，文章展示了不同负采样比率的NCF方法的性能。可以清楚地看到，每个正实例仅一个负样本不足以获得最佳性能，而对更多的负实例进行采样是有益的。
 >
 > 将GMF与BPR进行比较，可以看出采样率为1的GMF的性能与BPR相当，而GMF明显优于BPR。对于这两个数据集，最佳采样率大约是3-6。在Pinterest上发现当采样率大于7时，NCF方法的性能开始下降。结果表明，过于激进地设置采样率可能会对性能造成负面影响。
 
-img
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/12.jpg)
 
 #### 问题3
 
 > 由于使用神经网络学习用户-项目交互功能的研究工作很少，因此使用深度网络结构是否有助于推荐任务的研究就显得很有趣。文章进行了进一步的调查MLP具有不同数量的隐藏层，结果如下：
 
-img
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/13.jpg)
 
 > MLP-3表示MLP方法有三个隐藏层(除了嵌入层之外)，其他方法也有类似的表示法。即使对于具有相同功能的模型，堆叠更多的层也有利于性能。这个结果是非常令人鼓舞的，表明了使用深度模型进行协同推荐的有效性，把这种改善归因于叠加更多非线性层所带来的高非线性。为了验证这一点，文章进一步尝试叠加线性层，使用一个恒等函数作为激活函数。性能要比使用ReLU差的多。
 >
