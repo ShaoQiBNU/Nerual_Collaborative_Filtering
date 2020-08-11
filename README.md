@@ -19,7 +19,7 @@ Nerual Collaborative Filtering模型详解
 
 ### 通用框架
 
-img1
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/1.jpg)
 
 > 如图所示，框架底层是由两个特征向量<a href="https://www.codecogs.com/eqnedit.php?latex=v_{u}^{U}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?v_{u}^{U}" title="v_{u}^{U}" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=v_{i}^{I}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?v_{i}^{I}" title="v_{i}^{I}" /></a>组成，分别描述user和item的特征，在输入层之上为Embedding层，将稀疏表示投影到稠密向量embedding上。
 >
@@ -27,25 +27,19 @@ img1
 >
 > 最后一个隐含层X的维数决定了模型的能力，输出层是预测的分数<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{y_{ui}}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?\hat{y_{ui}}" title="\hat{y_{ui}}" /></a> ,而训练是通过最小化<a href="https://www.codecogs.com/eqnedit.php?latex=\hat{y_{ui}}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?\hat{y_{ui}}" title="\hat{y_{ui}}" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=y_{ui}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?y_{ui}" title="y_{ui}" /></a>之间的pointwise loss来完成的，常采用平方损失的回归，如下：
 
-img2
-
-
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/2.jpg)
 
 ### GMF
 
 > MF可以看做是NCF的一个特例，如下：
 
-img
-
-
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/3.jpg)
 
 ### MLP 
 
 > 由于NCF采用两条路径来对user和item进行建模，所以将这两种路径的特征串联起来是很直观的。然而，简单的向量连接并不能解释user和item的潜在特征之间的任何交互，这对于协同过滤进行建模效果是不够的。为了解决这个问题，文章在连接的向量上添加隐藏层，使用一个标准的MLP来学习用户和物品潜在特征之间的交互，从而可以灵活地学习<a href="https://www.codecogs.com/eqnedit.php?latex=p_{u}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?p_{u}" title="p_{u}" /></a>和<a href="https://www.codecogs.com/eqnedit.php?latex=q_{i}" target="_blank"><img src="https://latex.codecogs.com/svg.latex?q_{i}" title="q_{i}" /></a>之间的交互。NCF框架下的MLP模型定义为：
 
-img
-
-
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/4.jpg)
 
 ### GMF和MLP融合
 
@@ -53,13 +47,13 @@ img
 >
 > 一个简单的解决方案是让GMF和MLP共享相同的Embedding层，然后合并它们的交互函数的输出。具体来说，是将GMF与单层结构相结合的模型MLP表示为：
 
-img
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/5.jpg)
 
 > 然而，共享GMF和MLP的Embedding可能会限制融合模型的性能。例如，它意味着GMF和MLP必须使用相同大小的Embedding；对于两种模型的最优嵌入尺寸变化较大的数据集，该方案可能无法获得最优的集成。
 >
 > 为了给融合模型提供更大的灵活性，GMF和MLP分别学习独立的Embedding，并通过连接它们的最后一个隐藏层来组合这两个模型。如图所示：
 
-img
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/6.jpg)
 
 #### 预训练
 
