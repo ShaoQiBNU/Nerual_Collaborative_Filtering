@@ -105,11 +105,15 @@ Nerual Collaborative Filtering模型详解
 
 ![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/12.jpg)
 
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/13.jpg)
+
 #### 问题3
 
 > 由于使用神经网络学习用户-项目交互功能的研究工作很少，因此使用深度网络结构是否有助于推荐任务的研究就显得很有趣。文章进行了进一步的调查MLP具有不同数量的隐藏层，结果如下：
 
-![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/13.jpg)
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/14.jpg)
+
+![image](https://github.com/ShaoQiBNU/Nerual_Collaborative_Filtering/blob/master/img/15.jpg)
 
 > MLP-3表示MLP方法有三个隐藏层(除了嵌入层之外)，其他方法也有类似的表示法。即使对于具有相同功能的模型，堆叠更多的层也有利于性能。这个结果是非常令人鼓舞的，表明了使用深度模型进行协同推荐的有效性，把这种改善归因于叠加更多非线性层所带来的高非线性。为了验证这一点，文章进一步尝试叠加线性层，使用一个恒等函数作为激活函数。性能要比使用ReLU差的多。
 >
