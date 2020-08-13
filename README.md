@@ -119,3 +119,6 @@ Nerual Collaborative Filtering模型详解
 >
 > 对于没有隐藏层的MLP-0，嵌入层直接投影到预测，性能非常弱，并不比非个性化的ItemPop更好。这说明：简单地连接用户和项目潜在向量不足以对它们的特征交互进行建模，因此有必要使用隐藏层对其进行转换。
 
+
+## 代码
+https://github.com/hexiangnan/neural_collaborative_filtering
